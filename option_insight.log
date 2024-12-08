@@ -257,3 +257,23 @@ ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
 2024-12-08 11:17:18,882 - INFO - Testing shock=20.00%, S_shocked=291.41
 2024-12-08 11:17:18,882 - INFO - Calculated PnL=13.75
 2024-12-08 11:17:18,887 - INFO - Stress test completed and results exported
+2024-12-08 12:27:15,086 - INFO - Starting OptionInsight application
+2024-12-08 12:27:15,086 - ERROR - Critical error in main: [Errno 2] No such file or directory: 'config.json'
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 81, in main
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\market_scanner.py", line 6, in load_config
+    with open(config_file, 'r') as file:
+         ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.json'
+2024-12-08 12:28:18,809 - INFO - Starting OptionInsight application
+2024-12-08 12:28:18,809 - ERROR - Critical error in main: [Errno 2] No such file or directory: 'config.json'
+Traceback (most recent call last):
+  File "C:\Users\sjeff\OptionInsight\main.py", line 81, in main
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\src\market_scanner.py", line 6, in load_config
+    with open(config_file, 'r') as file:
+         ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.json'

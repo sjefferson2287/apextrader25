@@ -50,7 +50,7 @@ def get_stock_price(ticker: str) -> float:
 
 def calculate_option_metrics(options_df: pd.DataFrame, S: float, r: float) -> pd.DataFrame:
     """Calculate theoretical prices and Greeks for options."""
-    for index, row in options_df.iterrows():
+    def calculate_metrics(row):
         try:
             K = float(row['strike'])
             expiration = datetime.strptime(row['expiration'], '%Y-%m-%d')
@@ -61,16 +61,16 @@ def calculate_option_metrics(options_df: pd.DataFrame, S: float, r: float) -> pd
             theo_price = black_scholes(S, K, T, r, sigma, option_type)
             delta, gamma, theta, vega = calculate_greeks(S, K, T, r, sigma)
 
-            options_df.at[index, 'TheoreticalPrice'] = theo_price
-            options_df.at[index, 'Delta'] = delta
-            options_df.at[index, 'Gamma'] = gamma
-            options_df.at[index, 'Theta'] = theta
-            options_df.at[index, 'Vega'] = vega
-            
+            row['TheoreticalPrice'] = theo_price
+            row['Delta'] = delta
+            row['Gamma'] = gamma
+            row['Theta'] = theta
+            row['Vega'] = vega
         except Exception as e:
-            logging.warning(f"Error calculating metrics for option {row}: {str(e)}")
-            continue
-            
+            logging.warning(f"Error calculating metrics for option {row['contractSymbol']} at index {row.name}: {str(e)}")
+        return row
+
+    options_df = options_df.apply(calculate_metrics, axis=1)
     return options_df
 
 def main() -> None:
