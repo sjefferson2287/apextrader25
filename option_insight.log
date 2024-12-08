@@ -1,0 +1,259 @@
+2024-12-08 10:46:54,345 - INFO - Starting OptionInsight application
+2024-12-08 10:46:55,105 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 10:46:57,049 - INFO - Fetched 1806 options for AAPL
+2024-12-08 10:46:58,037 - INFO - Found 758 significantly mispriced options
+2024-12-08 10:46:58,078 - INFO - Exported options analysis to CSV
+2024-12-08 10:46:58,660 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 10:47:06,601 - ERROR - Critical error in main: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 134, in main
+    backtest_results = backtest_strategy(covered_call, ticker, '2021-01-01', '2021-12-31')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\backtesting.py", line 32, in backtest_strategy
+    pnl = strategy_fn(S, K, premium, [S_T])[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\strategies.py", line 23, in covered_call
+    stock_profit = S_range - S
+                   ~~~~~~~~^~~
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 276, in array_ufunc
+    result = maybe_dispatch_ufunc_to_dunder_op(self, ufunc, method, *inputs, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 198, in __rsub__
+    return self._arith_method(other, roperator.rsub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\base.py", line 1384, in _arith_method
+    return self._construct_result(result, name=res_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6231, in _construct_result
+    out = self._constructor(result, index=self.index, dtype=dtype, copy=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 584, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 659, in sanitize_array
+    subarr = _sanitize_ndim(subarr, data, dtype, index, allow_2d=allow_2d)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 718, in _sanitize_ndim
+    raise ValueError(
+ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+2024-12-08 10:49:51,354 - INFO - Starting OptionInsight application
+2024-12-08 10:49:52,082 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 10:49:53,967 - INFO - Fetched 1806 options for AAPL
+2024-12-08 10:49:55,082 - INFO - Found 758 significantly mispriced options
+2024-12-08 10:49:55,122 - INFO - Exported options analysis to CSV
+2024-12-08 10:49:55,713 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 10:50:11,330 - ERROR - Critical error in main: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 134, in main
+    backtest_results = backtest_strategy(covered_call, ticker, '2021-01-01', '2021-12-31')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\backtesting.py", line 32, in backtest_strategy
+    pnl = strategy_fn(S, K, premium, [S_T])[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\strategies.py", line 23, in covered_call
+    stock_profit = S_range - S
+                   ~~~~~~~~^~~
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 276, in array_ufunc
+    result = maybe_dispatch_ufunc_to_dunder_op(self, ufunc, method, *inputs, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 198, in __rsub__
+    return self._arith_method(other, roperator.rsub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\base.py", line 1384, in _arith_method
+    return self._construct_result(result, name=res_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6231, in _construct_result
+    out = self._constructor(result, index=self.index, dtype=dtype, copy=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 584, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 659, in sanitize_array
+    subarr = _sanitize_ndim(subarr, data, dtype, index, allow_2d=allow_2d)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 718, in _sanitize_ndim
+    raise ValueError(
+ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+2024-12-08 10:52:22,596 - INFO - Starting OptionInsight application
+2024-12-08 10:52:23,371 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 10:52:25,259 - INFO - Fetched 1806 options for AAPL
+2024-12-08 10:52:26,258 - INFO - Found 758 significantly mispriced options
+2024-12-08 10:52:26,297 - INFO - Exported options analysis to CSV
+2024-12-08 10:52:26,879 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 10:54:09,196 - ERROR - Critical error in main: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 134, in main
+    backtest_results = backtest_strategy(covered_call, ticker, '2021-01-01', '2021-12-31')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\backtesting.py", line 31, in backtest_strategy
+    pnl = strategy_fn(S, K, premium, np.array([S_T]))[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\strategies.py", line 23, in covered_call
+    stock_profit = S_range - S
+                   ~~~~~~~~^~~
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 276, in array_ufunc
+    result = maybe_dispatch_ufunc_to_dunder_op(self, ufunc, method, *inputs, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 198, in __rsub__
+    return self._arith_method(other, roperator.rsub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\base.py", line 1384, in _arith_method
+    return self._construct_result(result, name=res_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6231, in _construct_result
+    out = self._constructor(result, index=self.index, dtype=dtype, copy=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 584, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 659, in sanitize_array
+    subarr = _sanitize_ndim(subarr, data, dtype, index, allow_2d=allow_2d)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 718, in _sanitize_ndim
+    raise ValueError(
+ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+2024-12-08 11:07:55,143 - INFO - Starting OptionInsight application
+2024-12-08 11:07:55,916 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 11:07:57,959 - INFO - Fetched 1806 options for AAPL
+2024-12-08 11:07:58,934 - INFO - Found 758 significantly mispriced options
+2024-12-08 11:07:58,972 - INFO - Exported options analysis to CSV
+2024-12-08 11:07:59,545 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 11:08:04,097 - ERROR - Critical error in main: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 134, in main
+    backtest_results = backtest_strategy(covered_call, ticker, '2021-01-01', '2021-12-31')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\backtesting.py", line 31, in backtest_strategy
+    pnl = strategy_fn(S, K, premium, np.array([S_T]))[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\strategies.py", line 23, in covered_call
+    stock_profit = S_range - S
+                   ~~~~~~~~^~~
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 276, in array_ufunc
+    result = maybe_dispatch_ufunc_to_dunder_op(self, ufunc, method, *inputs, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 198, in __rsub__
+    return self._arith_method(other, roperator.rsub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\base.py", line 1384, in _arith_method
+    return self._construct_result(result, name=res_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6231, in _construct_result
+    out = self._constructor(result, index=self.index, dtype=dtype, copy=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 584, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 659, in sanitize_array
+    subarr = _sanitize_ndim(subarr, data, dtype, index, allow_2d=allow_2d)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 718, in _sanitize_ndim
+    raise ValueError(
+ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+2024-12-08 11:15:17,244 - INFO - Starting OptionInsight application
+2024-12-08 11:15:18,107 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 11:15:19,993 - INFO - Fetched 1806 options for AAPL
+2024-12-08 11:15:20,939 - INFO - Found 758 significantly mispriced options
+2024-12-08 11:15:20,978 - INFO - Exported options analysis to CSV
+2024-12-08 11:15:21,560 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 11:15:29,163 - ERROR - Critical error in main: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+Traceback (most recent call last):
+  File "c:\Users\sjeff\OptionInsight\main.py", line 134, in main
+    backtest_results = backtest_strategy(covered_call, ticker, '2021-01-01', '2021-12-31')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\backtesting.py", line 31, in backtest_strategy
+    pnl = strategy_fn(S, K, premium, np.array([S_T]))[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\sjeff\OptionInsight\src\strategies.py", line 23, in covered_call
+    stock_profit = S_range - S
+                   ~~~~~~~~^~~
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 276, in array_ufunc
+    result = maybe_dispatch_ufunc_to_dunder_op(self, ufunc, method, *inputs, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\arraylike.py", line 198, in __rsub__
+    return self._arith_method(other, roperator.rsub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\base.py", line 1384, in _arith_method
+    return self._construct_result(result, name=res_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 6231, in _construct_result
+    out = self._constructor(result, index=self.index, dtype=dtype, copy=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\series.py", line 584, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 659, in sanitize_array
+    subarr = _sanitize_ndim(subarr, data, dtype, index, allow_2d=allow_2d)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sjeff\OptionInsight\venv\Lib\site-packages\pandas\core\construction.py", line 718, in _sanitize_ndim
+    raise ValueError(
+ValueError: Data must be 1-dimensional, got ndarray of shape (1, 1) instead
+2024-12-08 11:17:09,493 - INFO - Starting OptionInsight application
+2024-12-08 11:17:10,260 - INFO - Current stock price for AAPL: $242.84
+2024-12-08 11:17:12,203 - INFO - Fetched 1806 options for AAPL
+2024-12-08 11:17:13,186 - INFO - Found 758 significantly mispriced options
+2024-12-08 11:17:13,234 - INFO - Exported options analysis to CSV
+2024-12-08 11:17:13,820 - INFO - P&L plot saved as: output\covered_call_pnl.png
+2024-12-08 11:17:18,880 - INFO - Backtest completed and results exported
+2024-12-08 11:17:18,880 - INFO - Starting stress test with S=242.83999633789062, K=254.98199615478518, premium=1.606200257998374
+2024-12-08 11:17:18,880 - INFO - Testing shock=-20.00%, S_shocked=194.27
+2024-12-08 11:17:18,880 - INFO - Calculated PnL=-46.96
+2024-12-08 11:17:18,881 - INFO - Testing shock=-10.00%, S_shocked=218.56
+2024-12-08 11:17:18,881 - INFO - Calculated PnL=-22.68
+2024-12-08 11:17:18,881 - INFO - Testing shock=0.00%, S_shocked=242.84
+2024-12-08 11:17:18,882 - INFO - Calculated PnL=1.61
+2024-12-08 11:17:18,882 - INFO - Testing shock=10.00%, S_shocked=267.12
+2024-12-08 11:17:18,882 - INFO - Calculated PnL=13.75
+2024-12-08 11:17:18,882 - INFO - Testing shock=20.00%, S_shocked=291.41
+2024-12-08 11:17:18,882 - INFO - Calculated PnL=13.75
+2024-12-08 11:17:18,887 - INFO - Stress test completed and results exported
