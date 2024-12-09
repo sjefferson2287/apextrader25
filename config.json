@@ -1,0 +1,10 @@
+{
+    "default_ticker": "AAPL",
+    "expiration": "2024-12-20",
+    "news_api_key": "ccaf0927307f42e49618b7ad4bc59b84Y",
+    "scanning_parameters": {
+        "high_iv_threshold": 0.2,
+        "strike_distance": 0.15,
+        "iv_hv_ratio_min": 1.0
+    }
+}
