@@ -19,34 +19,45 @@ def fetch_option_chain(ticker):
     all_options = []
 
     for expiration in expirations:
-        # Fetch option chain for each expiration date
-        opt = stock.option_chain(expiration)
-        calls = opt.calls.copy()
-        puts = opt.puts.copy()
+        try:
+            # Fetch option chain for each expiration date
+            opt = stock.option_chain(expiration)
+            calls = opt.calls.copy()
+            puts = opt.puts.copy()
 
-        # Add option type and expiration date
-        calls['optionType'] = 'call'
-        puts['optionType'] = 'put'
-        calls['expiration'] = expiration
-        puts['expiration'] = expiration
+            # Add option type and expiration date
+            calls['Option_Type'] = 'call'
+            puts['Option_Type'] = 'put'
+            calls['Expiration'] = expiration
+            puts['Expiration'] = expiration
 
-        # Append to the list
-        all_options.append(calls)
-        all_options.append(puts)
+            # Append to the list
+            all_options.append(calls)
+            all_options.append(puts)
+        except Exception as e:
+            print(f"Error fetching options for expiration {expiration}: {e}")
+
+    if not all_options:
+        print("No options data available.")
+        return pd.DataFrame()  # Return empty DataFrame if no data
 
     # Concatenate all option data into a single DataFrame
     options_df = pd.concat(all_options, ignore_index=True)
-    return options_df
 
-def fetch_option_market_data(ticker):
-    """
-    Fetches option chain with market data for the given ticker symbol.
+    # Convert expiration dates to datetime
+    options_df['Expiration'] = pd.to_datetime(options_df['Expiration'])
+    options_df['Date'] = pd.to_datetime('today')
 
-    Parameters:
-        ticker (str): The stock ticker symbol.
+    # Calculate time to expiration in years
+    options_df['Time_to_Expiration'] = (
+        options_df['Expiration'] - options_df['Date']
+    ).dt.days / 365
 
-    Returns:
-        pandas.DataFrame: Option chain including market prices.
-    """
-    options_df = fetch_option_chain(ticker)
+    # Add underlying price
+    underlying_price = stock.history(period='1d')['Close'][0]
+    options_df['Underlying_Price'] = underlying_price
+
+    # Clean up implied volatility
+    options_df['Implied_Volatility'] = options_df['impliedVolatility'].fillna(0)
+
     return options_df

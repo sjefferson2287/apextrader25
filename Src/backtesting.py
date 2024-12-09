@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
 import yfinance as yf
+import logging
 
-def backtest_strategy(strategy_fn, ticker, start_date, end_date):
+def backtest_strategy(strategy_func, ticker, start_date, end_date):
     """
     Backtest a given strategy over a date range.
 
@@ -16,20 +17,15 @@ def backtest_strategy(strategy_fn, ticker, start_date, end_date):
     DataFrame: Backtest results with dates and P&L
     """
     # Fetch historical data
-    data = yf.download(ticker, start=start_date, end=end_date)
-    dates = data.index
-    pnl_list = []
-
-    for date in dates:
-        # Set up necessary parameters for the strategy
-        S = data.loc[date, 'Close']  # Ensure S is a scalar
-        K = S * 1.05  # Example strike price 5% above current price
-        premium = 1.0  # Example premium, replace with actual calculation
-
-        # Simulate strategy P&L at expiration
-        S_T = S  # For simplicity, assume no price change
-        pnl = strategy_fn(S, K, premium, np.array([S_T]).flatten())[0]
-        pnl_list.append({'Date': date, 'P&L': pnl})
-
-    results_df = pd.DataFrame(pnl_list)
-    return results_df
+    stock = yf.Ticker(ticker)
+    hist = stock.history(start=start_date, end=end_date)
+    
+    # Initialize results DataFrame
+    results = pd.DataFrame(index=hist.index)
+    results['Close'] = hist['Close']
+    
+    # Apply strategy and calculate P&L
+    results['P&L'] = strategy_func(results['Close'])
+    
+    logging.info("Backtesting completed")
+    return results
