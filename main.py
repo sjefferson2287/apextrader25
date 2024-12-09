@@ -1,4 +1,3 @@
-# main.py
 import argparse
 import logging
 import os
@@ -12,9 +11,13 @@ from datetime import datetime
 # Add src directory to Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-from fetch_data import fetch_option_chain, fetch_option_market_data
-from black_scholes import black_scholes
-from greeks import calculate_greeks
+try:
+    from fetch_data import fetch_option_chain, fetch_option_market_data
+except ImportError as e:
+    logging.error(f"Import error: {e}")
+    sys.exit(1)
+from src.black_scholes import black_scholes
+from src.greeks import calculate_greeks
 from strategies import covered_call, protective_put, iron_condor
 from visualization import plot_pnl
 from backtesting import backtest_strategy
@@ -57,6 +60,7 @@ def main():
         config = load_config()
         ticker = args.ticker or config['default_ticker']
         expiration = args.expiration or config['expiration']
+        news_api_key = config.get('news_api_key')  # Ensure this key is in config.json
         
         # Define output directory
         output_dir = Path('output')
@@ -106,13 +110,7 @@ def main():
         var_df = pd.DataFrame({'VaR_95_confidence': [var]})
         var_df.to_csv(output_dir / 'var_analysis.csv', index=False)
         logging.info("VaR analysis exported")
-        
-        # Stress Testing
-        shocks = [-0.2, -0.1, 0, 0.1, 0.2]
-        stress_results = stress_test(covered_call, S, K, premium, shocks)
-        stress_results.to_csv(output_dir / 'stress_test_results.csv', index=False)
-        logging.info("Stress test completed and results exported")
-        
+
         # Market Scanning with debug logging
         logging.debug("Starting market scan...")
         filtered_options = scan_market(ticker, expiration, config)
