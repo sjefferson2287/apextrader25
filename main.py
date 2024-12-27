@@ -13,12 +13,17 @@ current_dir = Path(__file__).resolve().parent
 src_path = current_dir / 'src'
 sys.path.append(str(src_path))
 
+# Ensure logs directory exists
+logs_dir = current_dir / 'logs'
+if not logs_dir.exists():
+    logs_dir.mkdir()
+
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG,  # Change to INFO in production
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/option_insight.log'),
+        logging.FileHandler(logs_dir / 'option_insight.log'),
         logging.StreamHandler()
     ]
 )
@@ -33,11 +38,22 @@ except ImportError as e:
     logging.error(f"Import error: {e}", exc_info=True)
     sys.exit(1)
 
+def identify_mispriced_options(option_chain):
+    """
+    Identify mispriced options by comparing theoretical prices with market prices.
+    """
+    mispriced_options = option_chain[(option_chain['BS_Price'] - option_chain['lastPrice']).abs() > 1.0]
+    if not mispriced_options.empty:
+        logging.info(f"Mispriced options found:\n{mispriced_options[['contractSymbol', 'lastPrice', 'BS_Price']]}")
+    else:
+        logging.info("No mispriced options found.")
+    return mispriced_options
+
 def main():
     try:
         logging.info("Starting Option Insight application")
 
-        # Parse command-line arguments
+        # Parsing command-line arguments
         parser = argparse.ArgumentParser(description='OptionInsight CLI')
         parser.add_argument('--symbol', type=str, default='AAPL',
                             help='Stock symbol')
@@ -91,7 +107,7 @@ def main():
         # Calculate Black-Scholes prices
         option_chain['BS_Price'] = option_chain.apply(lambda row: black_scholes(
             S=row['Underlying_Price'],
-            K=row['strike'],  # Adjusted column name
+            K=row['strike'],
             T=row['Time_to_Expiration'],
             r=0.01,  # risk-free rate
             sigma=row['Implied_Volatility'],
@@ -100,42 +116,37 @@ def main():
         logging.info("Black-Scholes prices calculated")
 
         # Calculate Greeks
-        try:
-            greeks = option_chain.apply(
-                lambda row: pd.Series(calculate_greeks(
-                    S=row['Underlying_Price'],
-                    K=row['strike'],
-                    T=row['Time_to_Expiration'],
-                    r=0.01,  # Risk-free rate
-                    sigma=row['Implied_Volatility']
-                )),
-                axis=1
-            )
-            option_chain[['Delta', 'Gamma', 'Theta', 'Vega']] = greeks
-            logging.info("Greeks calculated successfully")
-        except Exception as e:
-            logging.error(f"Error calculating Greeks: {e}", exc_info=True)
-            sys.exit(1)
+        option_chain[['Delta', 'Gamma', 'Theta', 'Vega', 'Rho']] = option_chain.apply(lambda row: calculate_greeks(
+            S=row['Underlying_Price'],
+            K=row['strike'],
+            T=row['Time_to_Expiration'],
+            r=0.01,  # risk-free rate
+            sigma=row['Implied_Volatility']
+        ), axis=1, result_type='expand')
+        logging.info("Greeks calculated")
+
+        # Identify mispriced options
+        mispriced_options = identify_mispriced_options(option_chain)
+
+        # Define additional parameters for strategies
+        K = option_chain['strike'].iloc[0]
+        premium = option_chain['lastPrice'].iloc[0]
+        S_range = np.linspace(option_chain['Underlying_Price'].min(), option_chain['Underlying_Price'].max(), 100)
 
         # Apply the selected strategy
-        try:
-            if strategy == 'covered_call':
-                strategies_result = covered_call(option_chain)
-                logging.info("Covered Call strategy applied")
-            elif strategy == 'protective_put':
-                strategies_result = protective_put(option_chain)
-                logging.info("Protective Put strategy applied")
-            elif strategy == 'iron_condor':
-                strategies_result = iron_condor(option_chain)
-                logging.info("Iron Condor strategy applied")
-        except Exception as e:
-            logging.error(f"Error applying strategy {strategy}: {e}", exc_info=True)
-            sys.exit(1)
+        if strategy == 'covered_call':
+            strategies_result = covered_call(option_chain, K, premium, S_range)
+            logging.info("Covered Call strategy applied")
+        elif strategy == 'protective_put':
+            strategies_result = protective_put(option_chain, K, premium, S_range)
+            logging.info("Protective Put strategy applied")
+        elif strategy == 'iron_condor':
+            strategies_result = iron_condor(option_chain, K, premium, S_range)
+            logging.info("Iron Condor strategy applied")
 
         # Save the processed data
-        output_file = 'output/options_analysis.csv'
-        option_chain.to_csv(output_file, index=False)
-        logging.info(f"Option analysis data exported to {output_file}")
+        option_chain.to_csv('output/options_analysis.csv', index=False)
+        logging.info("Option analysis data exported")
 
     except Exception as e:
         logging.error(f"Critical error in main: {e}", exc_info=True)
