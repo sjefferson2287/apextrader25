@@ -158,30 +158,3 @@ Run tests:
 
  pytest tests/
 
-
-(Suggestion:)
-Specify Python version (e.g., Python 3.9+) in the README and requirements.txt.
-
-Roadmap
-Week 1 (Transition & Cleanup):
-Move code from Colab to /src modules.
-Validate Black-Scholes, Greeks, and mispricing logic in VS Code environment.
-Implement basic logging and error handling.
-Set up unit tests for backtesting.py and black_scholes.py.
-Week 2 (Feature Enhancements & Infrastructure):
-Integrate HV vs. IV comparison and simple technical indicators (RSI, MACD).
-Add a basic configuration file (config.json) for default parameters.
-Begin implementing a CLI interface for main.py (e.g., --ticker, --strategy).
-Week 3 (NLP & Advanced Analytics):
-Add sentiment analysis (VADER) for market headlines.
-Implement a simple data augmentation technique or feature selection metric.
-Introduce a basic VaR calculation for risk assessment.
-Week 4 (UI & Continuous Improvement):
-Create a basic Streamlit dashboard to visualize P&L curves, mispricing flags, and sentiment indicators.
-Integrate CI with GitHub Actions for automated testing and linting on every push.
-Explore data persistence with SQLite for logging results over multiple runs.
-Week 5+:
-Real-time data integration, advanced strategies (calendar spreads, straddles).
-Deployment on a cloud platform, set up alerts for real-time trading signals.
-Continuous refinement based on performance metrics and user feedback.
-tionInsight
