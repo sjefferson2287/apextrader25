@@ -4,10 +4,18 @@ OptionInsight
 Purpose:
 The goal of this project is to develop a Python-based bot for analyzing, backtesting, and simulating options trading strategies. The bot leverages the Black-Scholes model, historical data, and customizable strategies to identify profitable opportunities and visualize performance.
 
+Key Features:
+
+*   **Option Chain Retrieval**
+*   **Black-Scholes Model**
+*   **Strategy Backtesting**
+*   **Simulation and Visualization**
+
+
 Target use will be JMI family Trust initially mostly for private consumption 
 Core Functionalities (Completed):
-Option Chain Retrieval:
-
+Option Chain Retrieval: 
+Retrieves option chain data using yfinance and consolidates call and put options into one DataFrame for ease of analysis.
 
 Fetches option chain data using yfinance.
 Consolidates call and put options into one DataFrame for ease of analysis.

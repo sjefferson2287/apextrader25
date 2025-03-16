@@ -15,5 +15,9 @@ def compute_bollinger_bands(data, window=20, num_std=2):
     lower_band = rolling_mean - (rolling_std * num_std)
     return rolling_mean, upper_band, lower_band
 
+def compute_moving_average(data, window=20):
+    rolling_mean = data['Close'].rolling(window=window).mean()
+    return rolling_mean
+
 def compute_iv_hv_ratio(iv, hv):
     return iv / hv
