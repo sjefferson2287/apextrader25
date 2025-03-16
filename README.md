@@ -1,160 +1,131 @@
-# OpOptions Trading Bot: Project Overview
-Project Name:
-OptionInsight 
-Purpose:
-The goal of this project is to develop a Python-based bot for analyzing, backtesting, and simulating options trading strategies. The bot leverages the Black-Scholes model, historical data, and customizable strategies to identify profitable opportunities and visualize performance.
+# OptionInsight
 
-Key Features:
+## Project Overview
 
-*   **Option Chain Retrieval**
-*   **Black-Scholes Model**
-*   **Strategy Backtesting**
-*   **Simulation and Visualization**
+OptionInsight is a Python-based tool for analyzing, backtesting, and simulating options trading strategies. It leverages the Black-Scholes model, Binomial Tree model, historical data from yfinance, and customizable strategies to identify profitable opportunities and visualize performance.
 
+## Key Features
 
-Target use will be JMI family Trust initially mostly for private consumption 
-Core Functionalities (Completed):
-Option Chain Retrieval: 
-Retrieves option chain data using yfinance and consolidates call and put options into one DataFrame for ease of analysis.
+*   **Option Chain Retrieval:** Fetches option chain data from yfinance.
+*   **Black-Scholes Model:** Calculates theoretical option prices using the Black-Scholes model.
+*   **Binomial Tree Pricing:** Calculates theoretical option prices using the Binomial Tree model.
+*   **Option Greeks Calculation:** Calculates Delta, Gamma, Theta, Vega, and Rho for options.
+*   **Strategy Backtesting:** Backtests various option strategies using historical data.
+*   **Profit/Loss Simulation:** Simulates profit and loss for different option strategies.
+*   **Mispricing Identification:** Identifies potentially mispriced options.
+*   **Stress Testing:** Evaluates strategy robustness under extreme market conditions.
+*   **Data Export:** Exports processed data and backtest results to CSV for offline analysis.
 
-Fetches option chain data using yfinance.
-Consolidates call and put options into one DataFrame for ease of analysis.
-Black-Scholes Pricing:
+## Core Functionalities
 
+*   **Option Chain Retrieval:** Retrieves option chain data using yfinance and consolidates call and put options into one DataFrame for ease of analysis.
+*   **Black-Scholes Pricing:** Calculates option Greeks (Delta, Gamma, Theta, Vega, Rho) using the Black-Scholes model, facilitating sensitivity and risk analysis.
+*   **Binomial Tree Pricing:** Calculates theoretical option prices using the Binomial Tree model.
+*   **Mispricing Identification:** Flags potentially mispriced options where theoretical and market prices differ, highlighting trading opportunities.
+*   **Profit/Loss Simulation:** Models P&L for single options and multi-leg strategies (e.g., covered calls, protective puts, iron condors), visualizing potential outcomes across a range of underlying prices.
+*   **Backtesting Framework:** Integrates historical data to simulate past performance of chosen strategies. Currently tested with Covered Calls, Protective Puts, and Iron Condors on multiple tickers (AAPL, MSFT, TSLA, AMZN, SPY). Computes key metrics like Max Profit, Max Loss, Average P&L, and Win Rate.
+*   **Stress Testing:** Evaluates strategy robustness under extreme market conditions, assessing performance during large price swings or volatility spikes.
+*   **Data Export:** Saves processed data, theoretical prices, Greeks, mispricing flags, and backtest results to CSV for offline analysis.
 
-Computes theoretical prices for calls and puts.
-Enables comparing market prices to theoretical values.
-Option Greeks Calculation:
+## Installation
 
+1.  Clone the repository:
 
-Calculates Delta, Gamma, Theta, Vega for each option.
-Facilitates sensitivity and risk analysis.
-Mispricing Identification:
+    ```bash
+    git clone https://github.com/sjefferson2287/apextrader25.git
+    cd OptionInsight
+    ```
 
+2.  Create a virtual environment and install dependencies:
 
-Flags potentially mispriced options where theoretical and market prices differ.
-Highlights trading opportunities.
-Profit/Loss Simulation:
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Linux and macOS
+    venv\Scripts\activate  # On Windows
+    pip install -r requirements.txt
+    ```
 
+## Usage
 
-Models P&L for single options and multi-leg strategies (e.g., covered calls, protective puts, iron condors).
-Visualizes potential outcomes across a range of underlying prices.
-Backtesting Framework:
+1.  Run the main script:
 
+    ```bash
+    python main.py --symbols AAPL MSFT --strategy covered_call
+    ```
 
-Integrates historical data to simulate past performance of chosen strategies.
-Currently tested with Covered Calls, Protective Puts, Iron Condors on multiple tickers (AAPL, MSFT, TSLA, AMZN, SPY).
-Computes key metrics like Max Profit, Max Loss, Average P&L, Win Rate.
-Stress Testing:
+    *   `--symbols`: List of stock symbols to analyze (default: AAPL).
+    *   `--strategy`: Option strategy to analyze (default: covered\_call). Choices: covered\_call, protective\_put, iron\_condor.
 
+2.  The results will be saved to `output/options_analysis.csv`.
 
-Evaluates strategy robustness under extreme market conditions.
-Assesses performance during large price swings or volatility spikes.
-Data Export:
+## Configuration
 
+The `config.json` file contains the following configuration parameters:
 
-Saves processed data, theoretical prices, Greeks, mispricing flags, and backtest results to CSV for offline analysis.
-(Suggestion:)
-Consider adding a “Current Limitations” section (e.g., uses end-of-day data, no real-time feeds yet, certain assumptions in volatility modeling).
+```json
+{
+    "default_ticker": "AAPL",
+    "expiration": "2024-12-20",
+    "news_api_key": "YOUR_NEWS_API_KEY",
+    "scanning_parameters": {
+        "high_iv_threshold": 0.2,
+        "strike_distance": 0.15,
+        "iv_hv_ratio_min": 1.0
+    }
+}
+```
 
-Current Workflow (Google Colab)
-Code and analysis are in a Colab notebook.
-Interactive environment facilitates quick experiments, plotting, and adjustments.
-Strategies tested show promise, with Covered Calls and Protective Puts performing well historically; Iron Condors may need optimization.
-(Suggestion:)
-Note any version control currently used (if any), and where data output is stored.
+*   `default_ticker`: Default stock ticker symbol.
+*   `expiration`: Default option expiration date.
+*   `news_api_key`: API key for fetching news data (not currently used).
+*   `scanning_parameters`: Parameters for option scanning:
+    *   `high_iv_threshold`: Threshold for high implied volatility.
+    *   `strike_distance`: Distance from the current price for strikes to consider.
+    *   `iv_hv_ratio_min`: Minimum ratio of implied volatility to historical volatility.
 
-Why Transition to VS Code
-Clean Codebase: Easier to maintain and structure code across multiple files.
-Scalability: Prepares for integration with other APIs, databases, or CI/CD pipelines.
-Automation: Potential for scheduled runs, alerts, and continuous deployment.
-Collaboration & Version Control: Streamlined use of Git/GitHub.
-Deployment: Positions the project for deployment on AWS, Azure, or other platforms.
-(Suggestion:)
-Consider adding Dockerization or CI/CD pipelines later for a fully automated setup.
+## Directory Structure
 
-Proposed Directory Structure for VS Code
-/OptionInsight
-│
-├── /data                  # CSV files, exported results
-├── /notebooks             # Archived Jupyter notebooks (optional)
-├── /src                   # Python modules
+```
+OptionInsight/
+├── logs/                  # Log files (contains option_insight.log)
+├── output/                # Output files (contains CSV and PNG files)
+├── src/                   # Python modules
 │   ├── __init__.py
-│   ├── fetch_data.py      # Data retrieval (yfinance or other sources)
-│   ├── black_scholes.py   # Black-Scholes calculations
-│   ├── greeks.py          # Option Greeks calculations
-│   ├── strategies.py      # Implementations of strategies (covered calls, etc.)
 │   ├── backtesting.py     # Backtesting logic
-│   ├── visualization.py   # Plotting, reporting
+│   ├── binomial_tree.py   # Binomial tree option pricing
+│   ├── black_scholes.py   # Black-Scholes calculations
+│   ├── data_augmentation.py# Data augmentation techniques
+│   ├── feature_selection.py# Feature selection methods
+│   ├── fetch_data.py      # Data retrieval (yfinance)
+│   ├── fetch_news.py      # Fetching news data
+│   ├── greeks.py          # Option Greeks calculations
+│   ├── indicators.py      # Technical indicators
+│   ├── market_scanner.py  # Market scanning logic
+│   ├── risk_analytics.py  # Risk analysis tools
+│   ├── sentiment_analysis.py # Sentiment analysis of news
+│   ├── setup.py           # Setup and configuration
+│   ├── strategies.py      # Implementations of strategies (covered calls, etc.)
 │   ├── stress_testing.py  # Stress test simulations
 │   ├── utils.py           # Helper functions
-│   └── config.json        # Default settings (e.g., tickers, expiration dates)
+│   └── visualization.py   # Plotting, reporting
 │
-├── /tests                 # Unit and integration tests
-│   └── test_backtesting.py
+├── Test/                  # Unit and integration tests
+│   └── test_black_scholes.py
 │
 ├── main.py                # Main entry point for execution
 ├── README.md              # Project overview (this document)
 └── requirements.txt       # Python dependencies
+```
 
-(Suggestion:)
-Add docs/ directory for extended documentation if project expands.
-Use logging module for better debugging and auditing.
+## Contributing
 
-Suggested Enhancements in VS Code
-Feature Expansion:
+Contributions are welcome! Please follow these steps:
 
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Make your changes and commit them with descriptive commit messages.
+4.  Submit a pull request.
 
-Add more strategies (calendar spreads, straddles).
-Implement optimization algorithms to find best strikes/premiums.
-Streamlined I/O:
+## License
 
-
-Use a config.json for default parameters.
-Add CLI arguments to main.py for flexible runs (e.g., python main.py --ticker AAPL).
-Interactive Dashboard:
-
-
-Integrate Streamlit or Flask for a web-based UI.
-Enable on-the-fly parameter adjustments and visualize updated results.
-Real-Time Data Integration:
-
-
-Incorporate APIs like Alpha Vantage, Interactive Brokers for live feeds.
-Send alerts (email, Slack) for time-sensitive mispricing events.
-Code Refactoring:
-
-
-Add docstrings, type hints.
-Enforce consistent styling (PEP 8) and use linters (flake8, black).
-Performance Tracking & Data Persistence:
-
-
-Store P&L and strategy metrics in SQLite or PostgreSQL.
-Track historical vs. current performance trends over time.
-(Suggestion:)
-Integrate GitHub Actions or another CI tool for automated testing, linting, and deployment triggers.
-
-Setup Instructions
-Clone repository:
-
- git clone https://github.com/your-repo/OptionInsight.git
-cd OptionInsight
-
-
-Create a virtual environment and install dependencies:
-
- python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-
-Run main script:
-
- python main.py
-
-
-Run tests:
-
- pytest tests/
-
+[Specify the license here]
